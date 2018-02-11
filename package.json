@@ -1,0 +1,12 @@
+{
+  "name": "@influential/flow-graphql",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A set of tools for using GraphQL with Flow",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Asa Ayers <aayers@influential.co>",
+  "license": "ISC"
+}
