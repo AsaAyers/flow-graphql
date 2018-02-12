@@ -1,0 +1,46 @@
+# This file was automatically generated and should not be edited.
+# I couldn't get a custom directive to work, so LockedQuery uses comments
+#
+# LockedQuery v2
+query UseFragment {
+  luke: human(id: "1000") {
+    ...HumanFragment
+  }
+  leia: human(id: "1003") {
+    ...HumanFragment
+  }
+}
+
+fragment HumanFragment on Human {
+  name
+  homePlanet
+}
+# Type Info (generated automatically):
+#{
+#  "definitions": [
+#    {
+#      "selectionSet": {
+#        "selections": [
+#          {
+#            "human": "Human"
+#          },
+#          {
+#            "human": "Human"
+#          }
+#        ]
+#      }
+#    },
+#    {
+#      "selectionSet": {
+#        "selections": [
+#          {
+#            "name": "String"
+#          },
+#          {
+#            "homePlanet": "String"
+#          }
+#        ]
+#      }
+#    }
+#  ]
+#}

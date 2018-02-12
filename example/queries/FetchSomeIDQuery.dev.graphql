@@ -1,0 +1,39 @@
+# This file was automatically generated and should not be edited.
+# I couldn't get a custom directive to work, so LockedQuery uses comments
+#
+# LockedQuery v2
+query FetchSomeIDQuery($someId: String!) {
+  human(id: $someId) {
+    name
+  }
+}
+# Type Info (generated automatically):
+#{
+#  "definitions": [
+#    {
+#      "variableDefinitions": [
+#        {
+#          "type": {
+#            "type": {
+#              "String!": "String"
+#            }
+#          }
+#        }
+#      ],
+#      "selectionSet": {
+#        "selections": [
+#          {
+#            "human": "Human",
+#            "selectionSet": {
+#              "selections": [
+#                {
+#                  "name": "String"
+#                }
+#              ]
+#            }
+#          }
+#        ]
+#      }
+#    }
+#  ]
+#}

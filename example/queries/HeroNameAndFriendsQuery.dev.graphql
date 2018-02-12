@@ -1,0 +1,51 @@
+# This file was automatically generated and should not be edited.
+# I couldn't get a custom directive to work, so LockedQuery uses comments
+#
+# LockedQuery v2
+query HeroNameAndFriendsQuery {
+  hero {
+    id
+    name
+    friends {
+      id
+      name
+    }
+  }
+}
+# Type Info (generated automatically):
+#{
+#  "definitions": [
+#    {
+#      "selectionSet": {
+#        "selections": [
+#          {
+#            "hero": "Character",
+#            "selectionSet": {
+#              "selections": [
+#                {
+#                  "id": "String!"
+#                },
+#                {
+#                  "name": "String"
+#                },
+#                {
+#                  "friends": "[Character]",
+#                  "selectionSet": {
+#                    "selections": [
+#                      {
+#                        "id": "String!"
+#                      },
+#                      {
+#                        "name": "String"
+#                      }
+#                    ]
+#                  }
+#                }
+#              ]
+#            }
+#          }
+#        ]
+#      }
+#    }
+#  ]
+#}
