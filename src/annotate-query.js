@@ -162,13 +162,13 @@ export function walkQuery (schemaText: string, query: string, typeTree, validati
       Field (node, ignoredKey, ignoredParent, path) {
         const def = typeInfo.getFieldDef()
         const name = node.name.value
+        if (def == null) {
+          const parent = typeInfo.getParentType()
+          throw new Error(`Unable to find type for ${parent}.${name}`)
+        }
 
         if (validating) {
           const typeNode = R.path(path, typeTree)
-
-          if (def == null) {
-            throw new Error(`Unable to find type for ${def}`)
-          }
 
           if (typeNode[name] !== String(def.type)) {
             throw new Error(`Type mismatch. Actual: ${def.type} Expected: ${typeNode[name]}`)

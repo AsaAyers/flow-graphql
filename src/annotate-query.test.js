@@ -1,32 +1,56 @@
 // @flow
 
 import test from 'ava'
-import fs from 'fs'
-import path from 'path'
 import { annotateQuery } from '.'
+import { scanExamples, schema } from './_helpers'
 
-const queries = path.join(__dirname, '../example/queries')
-
-const schema = fs.readFileSync(path.join(queries, '../schema.graphql'), 'utf8')
-
-function idempotent (t, filename) {
-  const original = fs.readFileSync(path.join(queries, filename), 'utf8')
-  const a = annotateQuery(schema, original)
+function idempotent (t, query) {
+  const a = annotateQuery(schema, query)
   const b = annotateQuery(schema, a)
 
   t.is(a, b)
 }
-idempotent.title = (title, filename) => `${title} is idempotent. ${filename}`
+idempotent.title = (ignoredTitle, ignoredQuery, filename) => `idempotent: ${filename}`
 
-function examplesAreAnnotated (t, filename) {
-  const original = fs.readFileSync(path.join(queries, filename), 'utf8')
-  const a = annotateQuery(schema, original)
+function examplesAreAnnotated (t, query) {
+  const a = annotateQuery(schema, query)
   // Uncomment this to rewrite examples if the annotation format changes, or
   // another example is added.
   // fs.writeFileSync(path.join(queries, filename), a)
-  t.is(original, a)
+  t.is(query, a)
 }
+idempotent.title = (ignoredTitle, ignoredQuery, filename) => `examplesAreAnnotated: ${filename}`
 
-fs.readdirSync(queries).forEach((filename) => {
-  test('annotateQuery', [idempotent, examplesAreAnnotated], filename)
+scanExamples((query, filename) => {
+  test('annotateQuery', [idempotent, examplesAreAnnotated], query, filename)
+})
+
+test('throws on an invalid field', (t) => {
+  const query = `
+  query HeroNameQuery {
+    hero {
+      name
+      # Invalid field
+      midichlorianCount
+    }
+  }
+  `
+
+  t.throws(() => {
+    annotateQuery(schema, query)
+  }, /Character\.midichlorianCount/)
+})
+
+test('throws on an invalid query', (t) => {
+  const query = `
+  query HeroNameQuery {
+    heroo {
+      name
+    }
+  }
+  `
+
+  t.throws(() => {
+    annotateQuery(schema, query)
+  }, /Query\.heroo/)
 })
