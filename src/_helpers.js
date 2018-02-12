@@ -10,7 +10,9 @@ export const readQuery = (filename) =>
 export const schema = readQuery('../schema.graphql')
 
 export const scanExamples = (fn) =>
-  fs.readdirSync(queryPath).forEach((filename) => {
-    const query = readQuery(filename)
-    fn(query, filename)
-  })
+  fs.readdirSync(queryPath)
+    .filter((filename) => path.extname(filename) === '.graphql')
+    .forEach((filename) => {
+      const query = readQuery(filename)
+      fn(query, filename)
+    })
