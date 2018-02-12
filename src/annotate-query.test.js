@@ -3,7 +3,7 @@
 import test from 'ava'
 import fs from 'fs'
 import path from 'path'
-import { annotateQuery } from './annotate-query'
+import { annotateQuery } from '.'
 
 const queries = path.join(__dirname, '../example/queries')
 

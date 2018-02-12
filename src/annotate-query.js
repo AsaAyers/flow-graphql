@@ -10,7 +10,7 @@ import {
   visit,
 } from 'graphql'
 
-const version = 2
+export const version = 2
 const header = `
 # This file was automatically generated and should not be edited.
 # I couldn't get a custom directive to work, so LockedQuery uses comments
@@ -19,7 +19,7 @@ const header = `
 `
 const footer = `# Type Info (generated automatically):`
 const lockedRegex = /\s*#.*@LockedQuery\(type:"(.*)"\)/
-const versionRegex = /LockedQuery v(\d+)\n/
+export const versionRegex = /LockedQuery v(\d+)\n/
 
 function cleanAnnotatedQuery (query: string) {
   // Strip comment annotations that were used in v1
@@ -110,7 +110,7 @@ function validateInputTypeCompatibility (lockedInput: InputType, currentInput: I
   })
 }
 
-function walkQuery (schemaText: string, query: string, typeTree, validating: boolean) {
+export function walkQuery (schemaText: string, query: string, typeTree, validating: boolean) {
   const setValue = (path: Array<mixed>, name, type) => {
     const [ node ] = path.reduce((a, b) => makePath(a, b), [typeTree, queryAst])
     node[name] = type
